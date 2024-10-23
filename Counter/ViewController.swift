@@ -10,35 +10,30 @@ import UIKit
 
 // перечисление возможных событий,
 // которые могут быть записаны в историю
-enum operationType {
+enum OperationType {
     case plus
     case minus
     case refresh
     case block
 }
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
-    @IBOutlet weak var counterLabel: UILabel!
-    @IBOutlet weak var plusButton: UIButton!
-    @IBOutlet weak var minusButton: UIButton!
-    @IBOutlet weak var resetButton: UIButton!
-    @IBOutlet weak var historyTextView: UITextView!
+    @IBOutlet private weak var counterLabel: UILabel!
+    @IBOutlet private weak var plusButton: UIButton!
+    @IBOutlet private weak var minusButton: UIButton!
+    @IBOutlet private weak var resetButton: UIButton!
+    @IBOutlet private weak var historyTextView: UITextView!
     
     private var counter: Int = 0
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
 
-    @IBAction func plusButtonTap() {
+    @IBAction private func plusButtonTap() {
         counter += 1
         counterLabel.text = "Значение счётчика: " + String(counter)
         addEntryToHistory(typeOfOperation: .plus)
     }
     
-    @IBAction func minusButtonTap() {
+    @IBAction private func minusButtonTap() {
         if counter > 0 {
             counter -= 1
             counterLabel.text = "Значение счётчика: " + String(counter)
@@ -48,13 +43,13 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func resetButtonTap() {
+    @IBAction private func resetButtonTap() {
         counter = 0
         counterLabel.text = "Значение счётчика: " + String(counter)
         addEntryToHistory(typeOfOperation: .refresh)
     }
     
-    private func addEntryToHistory(typeOfOperation: operationType) {
+    private func addEntryToHistory(typeOfOperation: OperationType) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy HH:mm:ss: "
         
